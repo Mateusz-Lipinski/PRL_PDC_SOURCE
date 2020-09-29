@@ -1,2 +1,0 @@
-ld-config
-st-flash --reset write /home/pi/Desktop/workspace/stm32-vs/build/stm32-vs.bin  0x8000000

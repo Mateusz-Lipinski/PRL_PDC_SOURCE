@@ -1,8 +1,0 @@
-open 25.33.61.97
-pi
-Marakuja1!
-
-
-cd ~/Desktop/workspace/stm32-vs/build
-put build/stm32-vs.bin 
-quit

@@ -1,53 +1,46 @@
-# STM32 Framework
+Minimalne wymagania:
 
-VSCODE STM32 framework for CubeMX & HAL.
+GNU Arm Embedded Toolchain / mingw // do kompilacji
+Make for Windows  // do linkowania
+STM32CubeMX - do konfiguracji i generowania templatki kodu
+STM32 ST-LINK Utility - do programowania przez SWD i debugowania
+stm32flash.exe - do programowania przez uart, binarka załączona w ./
 
-Features automatic build and flash after code change.
 
-## Dependencies
+Plik projektu CubeMX: ./stm32-vs.ioc
 
-(\* are required for automatic build & flash feature)
+Kompilacja:
+Makefile wygenerowany jest przez CubeMX. Przy tworzeniu nowego pliku .c trzeba go tam dodać
+w cli: Make
 
-NODE\*
-NPM\*
-GNU Arm Embedded Toolchain / mingw
-Make for Windows
-STM32CubeMX
-STM32 ST-LINK Utility
+Programowanie przez ST-Link:
+flash.bat 
+(flagi -c UR -HardRst są konieczne dla tego mikrokontrolera)
 
-For debugging:
-OpenOCD (included precompiled binaries work fine, source:http://www.freddiechopin.info/en/download/category/4-openocd)
-Cortex-Debug (vscode addon)
 
-## Installation
+Programowanie przez uart:
+flashuart.bat przy uruchomionym bootloaderze
+(trzeba w pliku bat zmienić numer portu)
 
-1. Install:
+żeby uruchomić bootloader, trzeba NAJPIERW podłączyć kabel usb do komputera i do frontpanelu, a potem dopiero włączyć zasilacz,
+przy założonej na złącze SWD zaślepce (ma ona za zadanie podtrzymać przez chwilę stan niski przy hardresecie mikrokontrolera)
+Po zaprogramowaniu układu, żeby go uruchomić trzeba odpiąć usb i wyłączyć i włączyć zasilanie. 
 
-   NODE\*,
-   NPM\*,
-   mingw gcc,
-   Make for windows,
-   STM32 ST-LINK Utility,
+Jeśli włożymy usb PO włączeniu zasilania, możemy komunikować się z działającym układem przez uart.
 
-   and add all of bin folders to your PATH environment.
+Podczas normalnego programowania wygodniej jest przez ST-LINKa - nie trzeba wyłączać i włączać zasilania i odpinać kabla przy każdym flashowaniu i dostępny jest debugger.
 
-   System restart may be needed for these to apply.
+W README_framework.md opisałem dodatkowo skrypt w nodejs który pozwala na automatyczne buildowanie przy zmianie kodu, ale to opcjonalne.
 
-2. Install STM32CubeMX and edit /stm.ioc project file (Makefile must be selected as Toolchain/IDE).
+Do komunikacji przez uart z commandline używam programu @serialport/terminal (dostępny w npm).
+(wymagany npm i node, instalacja terminala przez `npm install @serialport/terminal -g`. Potem można uruchomić skrypt: `npm run serial` i wybrać port)
 
-3. Run "npm install" in project root folder\*.
+komendy uart są parsowane w `usart_utils.c`
+kod komend zdefiniowany jest w `cmd.c`
+ 
 
-4. It may be needed to define mcu (ex. "STM32F103xB") in .vscode/c_cpp_properties.json for VSCode IntelliSense to work properly
-   (It is added in makefile what messes up IntelliSenses path)
 
-5. For debugging: adjust paths in .vscode/launch.json
 
-## Usage
 
-1. a) run "npm run watch" command in project root folder for automatic build and flash\*.
 
-1. b) run "make & flash"
 
-1. edit /stm.ioc to setup CubeMX and regenerate project config files -> change flash.bat hex file path accordingly to project name
-
-1. use npm run serial for com port terminal

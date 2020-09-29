@@ -21,37 +21,15 @@
       ],
       "extensions": "bin",
       "delay": 1000
-    },
-    "upload-ftp": {
-      "patterns": [
-        "build"
-      ],
-      "extensions": "bin",
-      "delay": 1000
-    },
-    "upload-linux": {
-      "patterns": [
-        "build"
-      ],
-      "extensions": "bin",
-      "delay": 5000
-    }
+    },   
   },
   "scripts": {
     "serial": "serialport-terminal -b 115200 --no-echo",
-    "serial-echo": "serialport-terminal -b 115200",
     "make": "make",
-    "upload": "flash",
-    "upload-ftp": ".\\flash-ftp",
-    "upload-linux": "bash flash",
+    "upload": "flash",   
     "watch-make": "npm-watch make",
-    "watch-make-linux": "npm-watch make",
-    "watch-upload": "npm-watch upload",
-    "watch-upload-ftp": "npm-watch upload-ftp",
-    "watch-upload-linux": "npm-watch upload-linux",
+    "watch-upload": "npm-watch upload",  
     "watch": "concurrently  \"npm run watch-make\" \"npm run watch-upload\" ",
-    "watch-ftp": "concurrently \"npm run watch-make\" \"npm run watch-upload-ftp\" ",
-    "watch-linux": "concurrently  \"npm run watch-make-linux\" \"npm run watch-upload-linux\" "
   },
   "author": "ML",
   "license": "ISC",

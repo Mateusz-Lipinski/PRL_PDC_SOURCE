@@ -1,1 +1,1 @@
-./build/bin/stm32flash -w .build/stm32-vs.bin -v /dev/ttyUSB0
+./stm32flash -w .build/stm32-vs.bin -v COM0

@@ -2558,7 +2558,7 @@ OUTPUT(build/stm32-vs.elf elf32-littlearm)
  .debug_line    0x00014ec5      0x4c3 build/tim.o
  .debug_line    0x00015388       0x77 build/startup_stm32g071xx.o
 
-.debug_str      0x00000000     0x5d47
+.debug_str      0x00000000     0x5d60
  .debug_str     0x00000000     0x1955 build/main.o
                                0x1adf (size before relaxing)
  .debug_str     0x00001955      0x120 build/gpio.o
@@ -2599,36 +2599,36 @@ OUTPUT(build/stm32-vs.elf elf32-littlearm)
                                0x108a (size before relaxing)
  .debug_str     0x000049b9        0xd build/Filter.o
                                 0xf22 (size before relaxing)
- .debug_str     0x000049c6       0x38 build/PID704.o
-                               0x11e6 (size before relaxing)
- .debug_str     0x000049fe       0x38 build/PID352.o
-                               0x11e6 (size before relaxing)
- .debug_str     0x00004a36       0x38 build/values.o
-                               0x119b (size before relaxing)
- .debug_str     0x00004a6e        0xf build/TEMP_PID.o
-                               0x11d8 (size before relaxing)
- .debug_str     0x00004a7d       0x19 build/usart_utils.o
+ .debug_str     0x000049c6       0x51 build/PID704.o
+                               0x11ec (size before relaxing)
+ .debug_str     0x00004a17       0x38 build/PID352.o
+                               0x11ec (size before relaxing)
+ .debug_str     0x00004a4f       0x38 build/values.o
+                               0x11a1 (size before relaxing)
+ .debug_str     0x00004a87        0xf build/TEMP_PID.o
+                               0x11de (size before relaxing)
+ .debug_str     0x00004a96       0x19 build/usart_utils.o
                                 0xdb5 (size before relaxing)
- .debug_str     0x00004a96      0x3ba build/stm32g0xx_hal_lptim.o
+ .debug_str     0x00004aaf      0x3ba build/stm32g0xx_hal_lptim.o
                                 0x875 (size before relaxing)
- .debug_str     0x00004e50      0x710 build/stm32g0xx_hal_uart.o
+ .debug_str     0x00004e69      0x710 build/stm32g0xx_hal_uart.o
                                0x105b (size before relaxing)
- .debug_str     0x00005560      0x1cd build/stm32g0xx_hal_uart_ex.o
+ .debug_str     0x00005579      0x1cd build/stm32g0xx_hal_uart_ex.o
                                 0xa5e (size before relaxing)
- .debug_str     0x0000572d       0x21 build/spi.o
+ .debug_str     0x00005746       0x21 build/spi.o
                                0x10da (size before relaxing)
- .debug_str     0x0000574e       0x8a build/ADC.o
+ .debug_str     0x00005767       0x8a build/ADC.o
                                0x11be (size before relaxing)
- .debug_str     0x000057d8       0x39 build/DAC.o
+ .debug_str     0x000057f1       0x39 build/DAC.o
                                 0xfe7 (size before relaxing)
- .debug_str     0x00005811      0x4d1 build/stm32g0xx_hal_spi.o
+ .debug_str     0x0000582a      0x4d1 build/stm32g0xx_hal_spi.o
                                 0xcff (size before relaxing)
- .debug_str     0x00005ce2        0xa build/dma.o
+ .debug_str     0x00005cfb        0xa build/dma.o
                                0x1040 (size before relaxing)
- .debug_str     0x00005cec       0x37 build/tim.o
+ .debug_str     0x00005d05       0x37 build/tim.o
                                0x1191 (size before relaxing)
- .debug_str     0x00005d23       0x24 build/startup_stm32g071xx.o
-                                 0x37 (size before relaxing)
+ .debug_str     0x00005d3c       0x24 build/startup_stm32g071xx.o
+                                 0x3d (size before relaxing)
 
 .comment        0x00000000       0x79
  .comment       0x00000000       0x79 build/main.o
