@@ -10,9 +10,10 @@
 #include <stdlib.h>
 extern state State;
 
+// Execute command stored in State.cmd
 void cmd()
 {
-    HAL_GPIO_TogglePin(LED_PHASE_GPIO_Port, LED_PHASE_Pin);
+    // HAL_GPIO_TogglePin(LED_PHASE_GPIO_Port, LED_PHASE_Pin);
     switch (State.cmd)
     {
     case cmd_blink:
@@ -204,6 +205,7 @@ void cmd()
 
         break;
     }
+    // toggle if next command should be executed every 1s (to refresh display)
     case cmd_loop:
     {
         State.cmd = 0;
@@ -266,6 +268,7 @@ void cmd()
         SERIAL_WRITE("undefined\n");
         break;
     }
+    // reset
     case cmd_bootloader_enable:
     {
         State.cmd = 0;

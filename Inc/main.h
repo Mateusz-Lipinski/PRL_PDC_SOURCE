@@ -24,7 +24,8 @@
 #define __MAIN_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -35,21 +36,22 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "usart.h"
-/* USER CODE END Includes */
+	/* USER CODE END Includes */
 
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
+	/* Exported types ------------------------------------------------------------*/
+	/* USER CODE BEGIN ET */
 
-/* USER CODE END ET */
+	/* USER CODE END ET */
 
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
+	/* Exported constants --------------------------------------------------------*/
+	/* USER CODE BEGIN EC */
 
-/* USER CODE END EC */
+	/* USER CODE END EC */
 
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
+	/* Exported macro ------------------------------------------------------------*/
+	/* USER CODE BEGIN EM */
 
+	// Write to serial macro. Use like Printf.
 #define SERIAL_WRITE(f_, ...)                                     \
 	{                                                             \
 		uint8_t ___buff[100] = {0};                               \
@@ -57,13 +59,14 @@ extern "C" {
 		HAL_UART_Transmit(&huart2, ___buff, ___len, 1000);        \
 	}
 
-#define SERIAL_RED "\033[0;31m"
-#define SERIAL_GREEN "\033[0;32m"
-#define SERIAL_YELLOW "\033[0;33m"
-#define SERIAL_BLUE "\033[0;34m"
-#define SERIAL_COLOR_RESET "\033[0m"
-#define SERIAL_CLS "\e[1;1H\e[2J"
+#define SERIAL_RED "\033[0;31m"		 // Terminal codes for colors
+#define SERIAL_GREEN "\033[0;32m"	 //
+#define SERIAL_YELLOW "\033[0;33m"	 //
+#define SERIAL_BLUE "\033[0;34m"	 //
+#define SERIAL_COLOR_RESET "\033[0m" //
+#define SERIAL_CLS "\e[1;1H\e[2J"	 // Terminal code for clearing screen
 
+//SERIAL_WRITE in color:
 #define SERIAL_WRITE_RED(f_, ...)         \
 	{                                     \
 		SERIAL_WRITE(SERIAL_RED);         \
@@ -92,7 +95,7 @@ extern "C" {
 		SERIAL_WRITE(SERIAL_COLOR_RESET); \
 	}
 
-#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c" // Used to convert byte to binary representation
 #define BYTE_TO_BINARY(byte)       \
 	(byte & 0x80 ? '1' : '0'),     \
 		(byte & 0x40 ? '1' : '0'), \
@@ -103,14 +106,14 @@ extern "C" {
 		(byte & 0x02 ? '1' : '0'), \
 		(byte & 0x01 ? '1' : '0')
 
-#define UART_RX_BUFFER_LENGTH 64
-#define LPTIM_PRESCALER_1s_LSE 255
-#define LPTIM_PRESCALER_1s_LSI 250
+#define UART_RX_BUFFER_LENGTH 64   // Uart RX buffer length
+#define LPTIM_PRESCALER_1s_LSE 255 // TODO: LSE doesnt work
+#define LPTIM_PRESCALER_1s_LSI 250 // Prescale LSI to 1s
 
-/* USER CODE END EM */
+	/* USER CODE END EM */
 
-/* Exported functions prototypes ---------------------------------------------*/
-void Error_Handler(void);
+	/* Exported functions prototypes ---------------------------------------------*/
+	void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
@@ -153,9 +156,9 @@ void Error_Handler(void);
 #define ADC_MOSI_GPIO_Port GPIOB
 #define ADC_SCK_Pin GPIO_PIN_8
 #define ADC_SCK_GPIO_Port GPIOB
-/* USER CODE BEGIN Private defines */
+	/* USER CODE BEGIN Private defines */
 
-/* USER CODE END Private defines */
+	/* USER CODE END Private defines */
 
 #ifdef __cplusplus
 }

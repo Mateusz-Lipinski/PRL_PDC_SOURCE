@@ -5,6 +5,7 @@
 
 extern state State;
 
+// Parse UART commands
 void UART_PARSE(uint8_t buffer[UART_RX_BUFFER_LENGTH])
 {
     SERIAL_WRITE(" => ");

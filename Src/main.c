@@ -58,7 +58,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-state State = {0};
+state State = {0}; // Init global state with zeros
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -127,9 +127,9 @@ int main(void)
 
   //IRQ PRIORITY OVERRIDES:
   /* EXTI interrupt init*/
-  HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
+  HAL_NVIC_EnableIRQ(EXTI4_15_IRQn); // Inturrupt used as ADC Data ready
   HAL_InitTick(0);
-  HAL_NVIC_SetPriority(EXTI4_15_IRQn, 1, 0);
+  HAL_NVIC_SetPriority(EXTI4_15_IRQn, 1, 0); // For async ADC update
   HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 2, 0);
   HAL_NVIC_SetPriority(TIM6_DAC_LPTIM1_IRQn, 2, 0);
   HAL_NVIC_SetPriority(SPI2_IRQn, 2, 0);
@@ -145,36 +145,38 @@ int main(void)
   DAC_cmd(RF_ATT_704_FINE + DAC_WRITE + 0xffff);
   DAC_cmd(RF_ATT_704_OFFSET + DAC_WRITE + 0xffff);
 
-  ADC_update();
+  ADC_update(); // Start ADC
 
   TEMP_PID_Init();
-  Calib704();
-  Calib352();
+  Calib704(); // Determine best setpoints for phase regulation
+  Calib352(); //
 
   PID704_Init();
   PID352_Init();
 
-  State.cmd = cmd_rf_pid;
-  State.cmdLoop = 1;
-  uint32_t counter = 0;
+  State.cmd = cmd_rf_pid; // Display phase stabilization data
+  State.cmdLoop = 1;      // every 1 s
+
+  uint32_t counter = 0; // counter to slow down PIDs for stability (experimental)
+
   while (1)
   {
     if (State.cmd && (State.timer_1s_flag || !State.cmdLoop))
     {
-      State.timer_1s_flag = 0;
-      SERIAL_WRITE(SERIAL_CLS);
-      cmd();
+      State.timer_1s_flag = 0;  //execute command parsed from UART
+      SERIAL_WRITE(SERIAL_CLS); //
+      cmd();                    //
     };
     if (State.ADC_Updated)
     {
-      counter++;
-      Filter();
+      counter++; // if every ADC channel updated, filter data
+      Filter();  //
 
-      if (counter % FilterLength == 0 && State.ADC_Filter_Valid)
+      if (counter % FilterLength == 0 && State.ADC_Filter_Valid) // if filter output doesnt contain initial zeros and every n=FilterLength filter update
       {
-        PID704();
-        PID352();
-        TEMP_PID();
+        PID704();   // Execute PID alghoritms for phase and temperature
+        PID352();   //
+        TEMP_PID(); //
       }
     };
     /* USER CODE END WHILE */

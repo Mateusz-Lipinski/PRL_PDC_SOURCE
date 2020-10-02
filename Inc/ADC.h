@@ -5,29 +5,29 @@
 
 #define ADC_DATA_READY !HAL_GPIO_ReadPin(ADC_MISO_GPIO_Port, ADC_MISO_Pin)
 
-#define ADC_WRITE 0
-#define ADC_READ 0x40
+#define ADC_WRITE 0                                      // commands:
+#define ADC_READ 0x40                                    //
+#define ADC_CH_EN 0x8000                                 //
+#define ADC_AINPOS(i) ((0 <= i <= 15) ? (i << 5) : NULL) // Inputs addresses
+#define ADC_AINNEG 0b10110                               // GND input address (by design)
+#define ADC_SETUP_BI_UNIPOLAR0 0                         // Set inputs as unipolar
 
-#define ADC_CH_EN 0x8000
-#define ADC_AINPOS(i) ((0 <= i <= 15) ? (i << 5) : NULL)
-#define ADC_AINNEG 0b10110
+#define ADC_SETUP_REF_BUF 0xC00                                       // Registers addreses
+#define ADC_SETUP_AIN_BUF 0x300                                       //
+#define ADC_STATUS_REG 0x00                                           //
+#define ADC_MODE_REG 0x01                                             //
+#define ADC_INTERFACE_REG 0x02                                        //
+#define ADC_CHECK_REG 0x03                                            //
+#define ADC_DATA_REG 0x04                                             //
+#define ADC_GPIO_REG 0x06                                             //
+#define ADC_ID_REG 0x07                                               //
+#define ADC_CHx_REG(i) ((0 <= i <= 15) ? (0x10 + i) : NULL)           //
+#define ADC_SETUPCONx_REG(i) ((0 <= i && i <= 7) ? (0x20 + i) : NULL) //
+#define ADC_FILTCONx_REG(i) ((0 <= i && i <= 7) ? (0x28 + i) : NULL)  //
+#define ADC_OFFSETx_REG(i) ((0 <= i && i <= 7) ? (0x30 + i) : NULL)   //
+#define ADC_GAINx_REG(i) ((0 <= i && i <= 7) ? (0x38 + i) : NULL)     //
 
-#define ADC_SETUP_BI_UNIPOLAR0 0
-#define ADC_SETUP_REF_BUF 0xC00
-#define ADC_SETUP_AIN_BUF 0x300
-#define ADC_STATUS_REG 0x00
-#define ADC_MODE_REG 0x01
-#define ADC_INTERFACE_REG 0x02
-#define ADC_CHECK_REG 0x03
-#define ADC_DATA_REG 0x04
-#define ADC_GPIO_REG 0x06
-#define ADC_ID_REG 0x07
-#define ADC_CHx_REG(i) ((0 <= i <= 15) ? (0x10 + i) : NULL)
-#define ADC_SETUPCONx_REG(i) ((0 <= i && i <= 7) ? (0x20 + i) : NULL)
-#define ADC_FILTCONx_REG(i) ((0 <= i && i <= 7) ? (0x28 + i) : NULL)
-#define ADC_OFFSETx_REG(i) ((0 <= i && i <= 7) ? (0x30 + i) : NULL)
-#define ADC_GAINx_REG(i) ((0 <= i && i <= 7) ? (0x38 + i) : NULL)
-
+//Channel definitions:
 #define ADC_PD0_Power_CH 12  // MO352 vs FREQDIV MO704(/2)
 #define ADC_PD0_Phase_CH 11  // MO352 vs MO704(/2)
 #define ADC_PD1_Power_CH 5   // MO704 vs AMP704
@@ -61,7 +61,7 @@
 #define RF_POWER_AMP352 9                  // AMP352P
 #define RF_POWER_MO352 15                  // MO352P
 
-typedef enum
+typedef enum // Sampling rate definitions:
 {
     ADC_SPS_31250 = 0, //  31250 Sps
     ADC_SPS_15625 = 6, //  15625 Sps

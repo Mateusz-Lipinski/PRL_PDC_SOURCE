@@ -195,24 +195,24 @@ void TIM6_DAC_LPTIM1_IRQHandler(void)
   State.uptime++;
   State.timer_1s_flag = 1;
 
-  if (State.TEMP_PID_LOCK)
-  {
-    HAL_GPIO_WritePin(LED_TEMP_GPIO_Port, LED_TEMP_Pin, 1);
-  }
-  else
-  {
-    HAL_GPIO_TogglePin(LED_TEMP_GPIO_Port, LED_TEMP_Pin);
-  }
+  if (State.TEMP_PID_LOCK)                                  // Control TEMP locked LED on PCB
+  {                                                         //
+    HAL_GPIO_WritePin(LED_TEMP_GPIO_Port, LED_TEMP_Pin, 1); //
+  }                                                         //
+  else                                                      //
+  {                                                         //
+    HAL_GPIO_TogglePin(LED_TEMP_GPIO_Port, LED_TEMP_Pin);   //
+  }                                                         //
 
-  if (State.TEMP_PID_LOCK) //&& phase && power lock
-  {
-    HAL_GPIO_WritePin(LED_STATUS_GPIO_Port, LED_STATUS_Pin, 1);
-  }
-  else
-  {
-    HAL_GPIO_TogglePin(LED_STATUS_GPIO_Port, LED_STATUS_Pin);
-  }
-
+  if (State.TEMP_PID_LOCK)                                      //TODO: && phase locked && power locked
+  {                                                             //Control STATUS LED on the front panel
+    HAL_GPIO_WritePin(LED_STATUS_GPIO_Port, LED_STATUS_Pin, 1); //
+  }                                                             //
+  else                                                          //
+  {                                                             //
+    HAL_GPIO_TogglePin(LED_STATUS_GPIO_Port, LED_STATUS_Pin);   //
+  }                                                             //
+                                                                //
   /* USER CODE END TIM6_DAC_LPTIM1_IRQn 0 */
   HAL_LPTIM_IRQHandler(&hlptim1);
   /* USER CODE BEGIN TIM6_DAC_LPTIM1_IRQn 1 */

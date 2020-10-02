@@ -49,7 +49,6 @@ void MX_SPI1_Init(void)
   {
     Error_Handler();
   }
-
 }
 /* SPI2 init function */
 void MX_SPI2_Init(void)
@@ -73,46 +72,45 @@ void MX_SPI2_Init(void)
   {
     Error_Handler();
   }
-
 }
 
-void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
+void HAL_SPI_MspInit(SPI_HandleTypeDef *spiHandle)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(spiHandle->Instance==SPI1)
+  if (spiHandle->Instance == SPI1)
   {
-  /* USER CODE BEGIN SPI1_MspInit 0 */
+    /* USER CODE BEGIN SPI1_MspInit 0 */
 
-  /* USER CODE END SPI1_MspInit 0 */
+    /* USER CODE END SPI1_MspInit 0 */
     /* SPI1 clock enable */
     __HAL_RCC_SPI1_CLK_ENABLE();
-  
+
     __HAL_RCC_GPIOB_CLK_ENABLE();
     /**SPI1 GPIO Configuration    
     PB3     ------> SPI1_SCK
     PB4     ------> SPI1_MISO
     PB5     ------> SPI1_MOSI 
     */
-    GPIO_InitStruct.Pin = DAC_SCK_Pin|DAC_MISO_Pin|DAC_MOSI_Pin;
+    GPIO_InitStruct.Pin = DAC_SCK_Pin | DAC_MISO_Pin | DAC_MOSI_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF0_SPI1;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /* USER CODE BEGIN SPI1_MspInit 1 */
+    /* USER CODE BEGIN SPI1_MspInit 1 */
 
-  /* USER CODE END SPI1_MspInit 1 */
+    /* USER CODE END SPI1_MspInit 1 */
   }
-  else if(spiHandle->Instance==SPI2)
+  else if (spiHandle->Instance == SPI2)
   {
-  /* USER CODE BEGIN SPI2_MspInit 0 */
+    /* USER CODE BEGIN SPI2_MspInit 0 */
 
-  /* USER CODE END SPI2_MspInit 0 */
+    /* USER CODE END SPI2_MspInit 0 */
     /* SPI2 clock enable */
     __HAL_RCC_SPI2_CLK_ENABLE();
-  
+
     __HAL_RCC_GPIOB_CLK_ENABLE();
     /**SPI2 GPIO Configuration    
     PB6     ------> SPI2_MISO
@@ -126,7 +124,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
     GPIO_InitStruct.Alternate = GPIO_AF4_SPI2;
     HAL_GPIO_Init(ADC_MISO_GPIO_Port, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = ADC_MOSI_Pin|ADC_SCK_Pin;
+    GPIO_InitStruct.Pin = ADC_MOSI_Pin | ADC_SCK_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -136,58 +134,60 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
     /* SPI2 interrupt Init */
     HAL_NVIC_SetPriority(SPI2_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(SPI2_IRQn);
-  /* USER CODE BEGIN SPI2_MspInit 1 */
+    /* USER CODE BEGIN SPI2_MspInit 1 */
 
-  /* USER CODE END SPI2_MspInit 1 */
+    /* USER CODE END SPI2_MspInit 1 */
   }
 }
 
-void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle)
+void HAL_SPI_MspDeInit(SPI_HandleTypeDef *spiHandle)
 {
 
-  if(spiHandle->Instance==SPI1)
+  if (spiHandle->Instance == SPI1)
   {
-  /* USER CODE BEGIN SPI1_MspDeInit 0 */
+    /* USER CODE BEGIN SPI1_MspDeInit 0 */
 
-  /* USER CODE END SPI1_MspDeInit 0 */
+    /* USER CODE END SPI1_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_SPI1_CLK_DISABLE();
-  
+
     /**SPI1 GPIO Configuration    
     PB3     ------> SPI1_SCK
     PB4     ------> SPI1_MISO
     PB5     ------> SPI1_MOSI 
     */
-    HAL_GPIO_DeInit(GPIOB, DAC_SCK_Pin|DAC_MISO_Pin|DAC_MOSI_Pin);
+    HAL_GPIO_DeInit(GPIOB, DAC_SCK_Pin | DAC_MISO_Pin | DAC_MOSI_Pin);
 
-  /* USER CODE BEGIN SPI1_MspDeInit 1 */
+    /* USER CODE BEGIN SPI1_MspDeInit 1 */
 
-  /* USER CODE END SPI1_MspDeInit 1 */
+    /* USER CODE END SPI1_MspDeInit 1 */
   }
-  else if(spiHandle->Instance==SPI2)
+  else if (spiHandle->Instance == SPI2)
   {
-  /* USER CODE BEGIN SPI2_MspDeInit 0 */
+    /* USER CODE BEGIN SPI2_MspDeInit 0 */
 
-  /* USER CODE END SPI2_MspDeInit 0 */
+    /* USER CODE END SPI2_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_SPI2_CLK_DISABLE();
-  
+
     /**SPI2 GPIO Configuration    
     PB6     ------> SPI2_MISO
     PB7     ------> SPI2_MOSI
     PB8     ------> SPI2_SCK 
     */
-    HAL_GPIO_DeInit(GPIOB, ADC_MISO_Pin|ADC_MOSI_Pin|ADC_SCK_Pin);
+    HAL_GPIO_DeInit(GPIOB, ADC_MISO_Pin | ADC_MOSI_Pin | ADC_SCK_Pin);
 
     /* SPI2 interrupt Deinit */
     HAL_NVIC_DisableIRQ(SPI2_IRQn);
-  /* USER CODE BEGIN SPI2_MspDeInit 1 */
+    /* USER CODE BEGIN SPI2_MspDeInit 1 */
 
-  /* USER CODE END SPI2_MspDeInit 1 */
+    /* USER CODE END SPI2_MspDeInit 1 */
   }
-} 
+}
 
 /* USER CODE BEGIN 1 */
+
+//enable ADC_MISO_Pin EXTI mode for ADC Data Ready external inturrupt
 void ADC_DATA_READY_EXTI_Init()
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -200,6 +200,8 @@ void ADC_DATA_READY_EXTI_Init()
   HAL_NVIC_SetPriority(EXTI4_15_IRQn, 5, 5);
   HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
 }
+
+//disable ADC_MISO_Pin EXTI mode
 void ADC_DATA_READY_EXTI_deInit()
 {
   HAL_GPIO_DeInit(GPIOB, ADC_MISO_Pin);
